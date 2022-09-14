@@ -11,46 +11,147 @@
   <h1>Ejercicios de Programación en JavaScript</h1>
   <script>
     /* 1) Programa una función que cuente el número de caracteres de una cadena de texto, pe. miFunción("Hola Mundo") devolverá 10 */
+    function cantidadDeCaracteres(str){
+      return str.length;
+    }
+    console.log(cantidadDeCaracteres("Depeche Mode"))
 
 
     /* 2) Programa una función que te devuelva el texto recortado según el número de caracteres indicados, pe. miFunción("Hola Mundo", 4) devolverá "Hola" */
-
+    function recorte(str, corte){
+      return str.slice(0,corte);
+    }
+    console.log(recorte("Depeche Mode", 8));
 
 
     /* 3) Programa una función que dada una String te devuelva un Array de textos separados por cierto caracter, pe.
      miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'] */
+     function convertir_EnArreglo(str){
+      return str.split(" ");
+     }
+     console.log(convertir_EnArreglo("Depeche Mode"));
 
 
 
     /* 4) Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo */
+    function repetir__Veces(str, veces){
+      let string;
+      for ( veces; veces !== 0; veces --){
+        string = string + str;
+        if (veces > 1){
+          string = string + " "
+        }
+      }
+      return string;
+    }
+    console.log(repetir__Veces("Depeche Mode", 3))
 
 
 
     /* 5) Programa una función que invierta las palabras de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá "odnuM aloH" */
-
+    function cadenaInvertida(str){
+      let inverted = "";
+      for (let index = str.length - 1; index >= 0; index --){
+        inverted += str[index];
+      }
+      return ( inverted );
+    }
+    console.log(cadenaInvertida("Depeche Mode"));
+    
+    
 
 
     /* 6) Programa una función para contar el número de veces que se repite una palabra en un texto largo, pe. miFuncion("hola mundo adios mundo", "mundo") devolverá 2 */
-
+    function repeticionesEnLaCadena(cadena, palabra){
+      let apariciones = 0;
+      let arr = cadena.split(" ")
+      for (let index = 0; index < arr.length; index ++){
+        if ( arr[index] === palabra){
+          apariciones += 1
+        }
+      }
+      return apariciones;
+    }
+    console.log(repeticionesEnLaCadena("I sometimes wish I  was dead", "I"))
 
 
     /* 7) Programa una función que valide si una palabra o frase dada, es un palíndromo (que se lee igual en un sentido que en otro), pe. mifuncion("Salas") devolverá true */
+    function esPalindromo(str){
+      return str.toLowerCase() === cadenaInvertida(str).toLowerCase()
+    }
+    console.log(esPalindromo("Menem"));
 
 
 
     /* 8) Programa una función que elimine cierto patrón de caracteres de un texto dado, pe. miFuncion("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz") devolverá  "1, 2, 3, 4 y 5 */
+    function cadenaContieneElemento(str,elemento){
+      let verdad = false
+      for (let index = 0; index < str.length && verdad === false; index ++){
+        if ( str[index] === elemento){
+          verdad = str[index] === elemento;
+        }
+      }
+      return verdad
+    }
+    function eliminarPatron(cadena, patron){
+      let cadenaArr = cadena.split(" y ")
+      let nuevoString = ""
+      for (let index = 0; index < cadenaArr[0].length; index ++){
+        if (!cadenaContieneElemento(patron,cadenaArr[0][index])){
+          nuevoString += cadenaArr[0][index];
+         
+        }
+      }
+      nuevoString += " y ";
+      for (let index = 0; index < cadenaArr[1].length; index ++){
+        if (!cadenaContieneElemento(patron,cadenaArr[1][index])){
+          nuevoString += cadenaArr[1][index];
+         
+        }
+      }
+      return nuevoString
+    }
+    console.log(eliminarPatron("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz"))
 
 
 
     /* 9) Programa una función que obtenga un numero aleatorio entre 501 y 600 */
+    function aleatorioEnRango(min, max){
+      return Math.floor(Math.random()* (max - min + 1) + min )
+    }
+    console.log(aleatorioEnRango(501, 600))
 
 
 
     /* 10) Programa una función que reciba un número y evalúe si es capicúa o no (que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true  */
+    
+    function numeroInvertido(num){
+      let str =  num
+      str.toSting()
+      let inverted = "";
+      for (let index = str.length - 1; index >= 0; index --){
+        inverted += str[index];
+      }
+      return ( inverted );
+    }
+    
+    function esCapicua(num){
+      return num == numeroInvertido(num)
+    }
+    console.log(esPalindromo("1523251"));
 
 
 
     /* 11) Programa una función que calcule el factorial de un número (El factorial de un entero positivo n, se define como el producto de todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120 */
+
+    function factorial(num){
+      let final = num;
+      for ( let factor = num -1; factor > 0; factor --){
+        final *= factor
+      }
+      return final
+    }
+    console.log(factorial(5))
 
 
 
