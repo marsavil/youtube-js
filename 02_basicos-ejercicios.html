@@ -35,7 +35,7 @@
 
     /* 4) Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo */
     function repetir__Veces(str, veces){
-      let string;
+      let string = "";
       for ( veces; veces !== 0; veces --){
         string = string + str;
         if (veces > 1){
@@ -126,19 +126,22 @@
     /* 10) Programa una función que reciba un número y evalúe si es capicúa o no (que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true  */
     
     function numeroInvertido(num){
+      // Devuelve el número dado, pero invertido. 
+      // PPrecondición: el numero ingresado no debe contener ceros a la izquierda
       let str =  num
-      str.toSting()
+      str = str.toString()
       let inverted = "";
       for (let index = str.length - 1; index >= 0; index --){
-        inverted += str[index];
+        inverted = inverted + (str[index]);
       }
       return ( inverted );
+  
     }
     
     function esCapicua(num){
       return num == numeroInvertido(num)
     }
-    console.log(esPalindromo("1523251"));
+    console.log(esCapicua(1523251));
 
 
 
@@ -157,21 +160,115 @@
 
     /* 12) Programa una función que determine si un número es primo (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true */
 
+    function divisores(numero) {
+  
+    let div = []
+    for (let divisor = 1; divisor <= numero; divisor++){
+    if (numero % divisor === 0){
+      div.push(divisor);
+    }
+   }
+   return div
+  }
+    
+  function esPrimo(num){
+    return divisores(num).length === 2
+  }
+  console.log(esPrimo(59))
+  
+  function primosEnRango(min, max){
+    let primos = []
+    for (let contador = min;  contador <= max; contador++){
+      if ( esPrimo(contador)){
+        primos.push(contador)
+      }
+    }
+    return primos
+  }
+  console.log(primosEnRango(0,10));
+
 
 
     /* 13) Programa una función que determine si un número es par o impar, pe. miFuncion(29) devolverá Impar */
+
+    function parOImpar(num){
+      if (num % 2 === 0){
+        return "Es par";
+      }else{
+        return "es impar";
+      }
+    }
+    console.log(parOImpar(15))
 
 
 
     /* 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe. miFuncion(0,"C") devolverá 32°F */
 
+    function conversionGrados(temperatura, escala){
+      //convierte grados celsius a fahrenheit y vicersa. El parametro escala solo acepta "C" o "F" como argumentos para celsius y fahrenheit respectivamente. Además, el argumento hace referencia a la temperatura pasada por parametro.
+
+      if (escala === "C"){
+        return (temperatura * 9 / 5) + 32 + " grado(s) Fahrenheit";
+      } else if ( escala === "F"){
+        return Math.round((temperatura - 32) * 5 / 9 ) + " grado(s) Celsius";
+      } else if ( escala === "F"){
+      }else{
+        return "Ingrese 'C' o 'F' (Celsius o Fahrenheit respectivamente)para indicar la temperatura de origen"
+      }
+    }
+    console.log(conversionGrados(64,"F"))
+
 
 
     /* 15) Programa una función para convertir números de base binaria a decimal y viceversa, pe. miFuncion(100,2) devolverá 4 base 10 */
 
+    function convertirABinario(num){
+      let number = num;
+      let binario = (num % 2).toString();
+      for (; number > 1;){
+        number = parseInt(number / 2);
+        binario = (number % 2) + binario;
+      }
+      return binario;
+
+    }
+    function convertirBinario(num){
+      // convierte el numero binario dad a decimal. 
+      //Precondicion: El número dado no debe tener ceros a la izquierda
+      let numero = num;
+      numero = numero.toString();
+      let decimal = 0;
+      for ( let index = numero.length - 1; index >=0 ; index --){
+        decimal += numero[index]*(2**(numero.length -1 - index));
+      }
+      return decimal
+    }
+    
+
+    function convertirNumero(num, base){
+      // convierte numeros binarios (base 2) a decimales (base 10) y viceversa
+      if (base === 2){
+        //return parseInt(num, base);
+        return convertirBinario(num)
+      } else if(base === 10) {
+        return convertirABinario(num);
+      } else {
+        return " ingrese 2 o 10 para indicar el sistema de origen "
+      }
+      
+    }
+    
+    console.log(convertirNumero(11,2))
+
 
 
     /* 16) Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, pe. miFuncion(1000, 20) devolverá 800 */
+    function montoFinal(precio, descuento){
+      // devuelve el monto a abonar luego de aplicado el descuento dado
+      let coeficiente = (100 - descuento) / 100;
+      return precio * coeficiente
+    }
+    console.log(montoFinal(1000,20))
 
 
 
@@ -180,6 +277,53 @@
 
 
     /* 18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5 */
+
+    function soloLetras(str){
+      // devuelve un arreglo con solo las letras de la cadena dada limpiandola de cualquier otro tipo de caracter
+      let may = str.toUpperCase();
+      let min = str.toLowerCase();
+      let letras = []
+      for ( let indice = 0; indice < may.length; indice ++ ){
+        if (may[indice] !== min[indice]){
+          letras.push(str[indice])
+        }
+      }
+      return letras
+    }
+    console.log(soloLetras("Hola mundo,.-{}@32356+'**]`"));
+    
+    function esVocal(letra){
+      // indica si la letra dada es vocal
+      if ( letra === "a" || letra === "A"){
+        return letra === "a" || letra === "A";
+      }else if ( letra === "e" || letra === "E"){
+        return letra === "e" || letra === "E";
+      }else if ( letra === "i" || letra === "I"){
+        return letra === "i" || letra === "I";
+      }else if ( letra === "o" || letra === "O"){
+        return letra === "o" || letra === "O";
+      }else if ( letra === "u" || letra === "U"){
+        return letra === "u" || letra === "U";
+      }
+    }
+
+
+    function cantidadDeVocalesYConsonates(str){
+      // Devuelve la cantidad de vocales y consonantes que conforman la cadena dada.
+      let letrasArr = soloLetras(str);
+      let vocales = 0;
+      let consonantes = 0;
+      for ( let indice = 0; indice < letrasArr.length; indice ++){
+        if ( esVocal(letrasArr[indice])){
+          vocales += 1;
+        }else{
+          consonantes += 1;
+        }
+      }
+      return `${str} contiene ${vocales} vocales y ${consonantes} consonantes`
+    }
+    console.log(cantidadDeVocalesYConsonates("Que pedazo de boludo!"))
+    
 
 
 
@@ -197,21 +341,123 @@
 
     /* 22) Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60] */
 
+    function mayorMenor(arr){
+      // devuelve el menor y el mayor numero del array dado.
+      let menor = 0;
+      let mayor = 0;
+      for ( let indice = 0; indice < arr.length; indice++){
+        if ( arr[indice] < menor){
+          menor = arr[indice];
+        }else if (arr[indice] > mayor){
+          mayor = arr[indice];
+        }
+      }
+      return [mayor, menor]
+    }
+    console.log(mayorMenor([1, 4, 5, 99, -60]))
+
 
 
     /* 23) Programa una función que dado un array de números devuelva un objeto con 2 arreglos en el primero almacena los números pares y en el segundo los impares, pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]} */
+
+    function esPar(num){
+      // indica si el número dado es par.
+
+      return num % 2 === 0
+    }
+
+    function numeros(arr){
+      // devuelve un ojeto con los número del arreglo con las propiedades pares e impares
+
+      let pares = [];
+      let impares = [];
+      for ( let indice = 0; indice < arr.length; indice ++){
+        if( esPar(arr[indice])){
+          pares.push(arr[indice]);
+        } else {
+          impares.push(arr[indice]);
+        }
+      }
+      return { pares : pares, impares : impares}
+    }
+
+    console.log(numeros([1,2,3,4,5,6,7,8,9,0]))
 
 
 
     /* 24) Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, el primero tendrá los numeros ordenados en forma ascendente y el segundo de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }*/
 
+    function concatenarElementoSegun(arr, elemento, condicion) {
+      // concatena el elemento dado al inicio o al final del arreglo segun se cumpla o no la condicion
+      if (condicion){
+        arr.push(elemento);
+      }else{
+        arr.unshift(elemento);
+      }
+    }
+
+    function numerosOrdenados(arr){
+      //devuelve un objeto con las propiedades asc y desc donde los número del array dado son ordenados de forma ascendente y descendiente respectivamente
+      let asc = arr;
+      asc =  asc.sort();
+      let desc = [];
+      for ( let index = asc.length -1; index >= 0; index --){
+        desc.push(asc[index])
+      }
+      
+      return { asc : asc, desc : desc}
+    }
+     console.log( numerosOrdenados([7, 5, 7, 8, 6]));
+
 
 
     /* 25) Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true]  */
 
+    function eliminarDuplicados(array){
+      // devuelve un arreglo con los elementos del arreglo dado, pero elimina deja fuera los elementos duplicados
+
+      let nuevoArray = [array[0]];
+      for ( let indice = 1; indice < array.length; indice ++){
+        if (!contieneElElemento(nuevoArray, array[indice])){
+          nuevoArray.push(array[indice]);
+        }
+      }
+      return nuevoArray;
+    }
+    function contieneElElemento(arr, elemento){
+      // indica si el elemento dado se encuentra dentro del array dado.
+      let verdad = false;
+      for ( let indice = 0; indice < arr.length; indice ++){
+        if ( arr[indice] === elemento){
+          verdad = arr[indice] === elemento;
+        }
+      }
+      return verdad;
+    }
+    console.log(eliminarDuplicados(["x", 10, "x", 2, "10", 10, true, true]));
+
 
 
     /* 26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5 */
+
+    function promedio(arr){
+      // devuelve el promedio de todos los elementos del arrego. 
+      // Es precondición para invocar esta función que el arreglo dado este compuesto por elementos de tipo número
+
+      return suma(arr) / arr.length;
+    }
+    
+    function suma(arr){
+      // devuelve la suma de los elemento contenidos en el arreglo siendo este un arreglo exclusivamente de elemento de tipo número
+
+      let sum = 0;
+      for (let indice = 0; indice < arr.length; indice ++){
+        sum = sum + arr[indice];
+
+      }
+      return sum;
+    }
+    console.log(promedio([9,8,7,6,5,4,3,2,1,0]))
 
 
 
